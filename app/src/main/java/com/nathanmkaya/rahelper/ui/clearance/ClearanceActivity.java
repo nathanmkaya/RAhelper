@@ -1,4 +1,4 @@
-package com.nathanmkaya.rahelper.ui.maintenance;
+package com.nathanmkaya.rahelper.ui.clearance;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -15,7 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MaintenanceActivity extends BaseActivity {
+public class ClearanceActivity extends BaseActivity {
 
     @BindView(R.id.view_pager)
     ViewPager viewPager;
@@ -25,19 +25,19 @@ public class MaintenanceActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maintenance);
-        //setContent(R.layout.activity_maintenance);
+        setContentView(R.layout.activity_clearance);
         ButterKnife.bind(this);
+
         List<Fragment> fragments = getFragments();
-        FragmentPagerAdapter pagerAdapter = new MaintenancePagerAdapter(getSupportFragmentManager(), fragments);
+        FragmentPagerAdapter pagerAdapter = new ClearancePagerAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
 
     private List<Fragment> getFragments() {
         List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(MaintenanceFragment.newInstance("pending"));
-        fragmentList.add(MaintenanceFragment.newInstance("fixed"));
+        fragmentList.add(ClearanceFragment.newInstance("not_cleared"));
+        fragmentList.add(ClearanceFragment.newInstance("cleared"));
         return fragmentList;
     }
 }

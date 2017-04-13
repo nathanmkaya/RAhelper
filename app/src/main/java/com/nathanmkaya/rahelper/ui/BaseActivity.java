@@ -1,10 +1,10 @@
 package com.nathanmkaya.rahelper.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,35 +13,57 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.nathanmkaya.rahelper.R;
+import com.nathanmkaya.rahelper.ui.clearance.ClearanceActivity;
+import com.nathanmkaya.rahelper.ui.device.DevicesActivity;
+import com.nathanmkaya.rahelper.ui.maintenance.MaintenanceActivity;
+import com.nathanmkaya.rahelper.ui.news.NewsActivity;
+import com.nathanmkaya.rahelper.ui.student.StudentsActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
+    @BindView(R.id.fab)
+    public FloatingActionButton fab;
     @BindView(R.id.nav_view_bottom)NavigationView bottomNavigation;
     @BindView(R.id.nav_view_top)NavigationView topNavigation;
     @BindView(R.id.drawer_layout)DrawerLayout drawer;
     @BindView(R.id.toolbar)Toolbar toolbar;
-    @BindView(R.id.fab)FloatingActionButton fab;
+    @BindView(R.id.content)
+    FrameLayout content;
+
+    public void setContent(int layoutResID) {
+
+        //content.addView(getLayoutInflater().inflate(layoutResID, null));
+        getLayoutInflater().inflate(layoutResID, content, true);
+
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+    public void setContentView(int layoutResID) {
+        View root = getLayoutInflater().inflate(R.layout.activity_main, null);
+        FrameLayout contentView = (FrameLayout) root.findViewById(R.id.content);
+        contentView.addView(getLayoutInflater().inflate(layoutResID, null));
+        super.setContentView(root);
+        //ButterKnife.bind(root);
+    }
 
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
         setSupportActionBar(toolbar);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -49,6 +71,14 @@ public class MainActivity extends AppCompatActivity {
 
         topNavigation.setNavigationItemSelectedListener(topListener());
         bottomNavigation.setNavigationItemSelectedListener(bottomListener());
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //super.setContentView(R.layout.activity_main);
+
+
     }
 
     @Override
@@ -89,7 +119,23 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id){
+                    case R.id.nav_students:
+                        startActivity(new Intent(BaseActivity.this, StudentsActivity.class));
+                        break;
+                    case R.id.nav_devices:
+                        startActivity(new Intent(BaseActivity.this, DevicesActivity.class));
+                        break;
+                    case R.id.nav_maintenance:
+                        startActivity(new Intent(BaseActivity.this, MaintenanceActivity.class));
+                        break;
+                    case R.id.nav_news:
+                        startActivity(new Intent(BaseActivity.this, NewsActivity.class));
+                        break;
+                    case R.id.nav_clearance:
+                        startActivity(new Intent(BaseActivity.this, ClearanceActivity.class));
+                        break;
                     default:
+                        break;
                 }
                 drawer.closeDrawer(GravityCompat.START);
                 return true;

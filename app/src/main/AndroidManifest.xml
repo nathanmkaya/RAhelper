@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.BaseActivity"
             android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.student.StudentsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,10 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.student.StudentsActivity" />
-        <activity android:name=".ui.news.NewsActivity" />
-        <activity android:name=".ui.maintenance.MaintenanceActivity" />
-        <activity android:name=".ui.device.DevicesActivity"></activity>
+        <activity
+            android:name=".ui.news.NewsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.maintenance.MaintenanceActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.device.DevicesActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.clearance.ClearanceActivity"></activity>
     </application>
 
 </manifest>

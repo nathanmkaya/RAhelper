@@ -24,6 +24,8 @@ public class IssueHolder extends RecyclerView.ViewHolder {
     TextView datePostedTxt;
     @BindView(R.id.date_fixed_txt)
     TextView dateFixedTxt;
+    @BindView(R.id.issueTxt)
+    TextView issueTxt;
 
     private ClickListener clickListener;
 

@@ -36,8 +36,8 @@ public class MaintenanceActivity extends BaseActivity {
 
     private List<Fragment> getFragments() {
         List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(MaintenanceFragment.newInstance("pending"));
-        fragmentList.add(MaintenanceFragment.newInstance("fixed"));
+        fragmentList.add(MaintenanceFragment.newInstance(false));
+        fragmentList.add(MaintenanceFragment.newInstance(true));
         return fragmentList;
     }
 }

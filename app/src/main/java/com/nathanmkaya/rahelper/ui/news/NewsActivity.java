@@ -61,5 +61,6 @@ public class NewsActivity extends BaseActivity {
                 return holder;
             }
         };
+        newsList.setAdapter(recyclerAdapter);
     }
 }

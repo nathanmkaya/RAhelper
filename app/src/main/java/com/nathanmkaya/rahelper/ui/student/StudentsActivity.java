@@ -1,5 +1,6 @@
 package com.nathanmkaya.rahelper.ui.student;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.nathanmkaya.rahelper.R;
@@ -14,10 +17,6 @@ import com.nathanmkaya.rahelper.model.Student;
 import com.nathanmkaya.rahelper.ui.BaseActivity;
 import com.nathanmkaya.rahelper.ui.custom.ClickListener;
 import com.nathanmkaya.rahelper.utils.DbReference;
-import com.squareup.picasso.Picasso;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +46,8 @@ public class StudentsActivity extends BaseActivity {
                 /*FragmentManager fragmentManager = getSupportFragmentManager();
                 AddStudent addStudent = new AddStudent();
                 addStudent.show(fragmentManager, "add_student");*/
-                fillDatabase();
+                startActivity(new Intent(getBaseContext(), AddStudentActivity.class));
+                //fillDatabase();
 
             }
         });
@@ -60,13 +60,15 @@ public class StudentsActivity extends BaseActivity {
             @Override
             protected void populateViewHolder(StudentHolder studentHolder, Student student, int i) {
 
-                Picasso.with(StudentsActivity.this)
+                Glide.with(StudentsActivity.this)
                         .load(student.img)
+                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                         .into(studentHolder.studentImg);
                 //studentHolder.studentImg.setImageURI(Uri.parse(student.img));
                 studentHolder.studentName.setText(student.name);
                 studentHolder.studentRegNo.setText(student.regNo);
                 studentHolder.studentRoomNo.setText(student.room);
+                studentHolder.studentNoDevice.setText(student.devices.size() != 0 ? String.valueOf(student.devices.size()) : String.valueOf(0));
             }
 
             @Override
@@ -92,10 +94,10 @@ public class StudentsActivity extends BaseActivity {
     private void fillDatabase() {
         for (int i = 0; i < 5; i++) {
             Student student = new Student("test" + i, "14-186" + i, String.valueOf(i), "img" + i);
-            Map<String, Object> postValues = student.toMap();
+            /*Map<String, Object> postValues = student.toMap();
             Map<String, Object> childUpdates = new HashMap<>();
-            childUpdates.put("test" + i, postValues);
-            students.push().setValue(childUpdates);
+            childUpdates.put("test" + i, postValues);*/
+            students.push().setValue(student);
         }
     }
 }

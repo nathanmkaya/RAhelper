@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.nathanmkaya.rahelper.R;
 import com.nathanmkaya.rahelper.ui.BaseActivity;
@@ -27,7 +28,7 @@ public class ClearanceActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clearance);
         ButterKnife.bind(this);
-
+        fab.setVisibility(View.GONE);
         List<Fragment> fragments = getFragments();
         FragmentPagerAdapter pagerAdapter = new ClearancePagerAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(pagerAdapter);
@@ -36,8 +37,8 @@ public class ClearanceActivity extends BaseActivity {
 
     private List<Fragment> getFragments() {
         List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(ClearanceFragment.newInstance("not_cleared"));
-        fragmentList.add(ClearanceFragment.newInstance("cleared"));
+        fragmentList.add(ClearanceFragment.newInstance(false));
+        fragmentList.add(ClearanceFragment.newInstance(true));
         return fragmentList;
     }
 }

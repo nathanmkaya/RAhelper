@@ -1,16 +1,18 @@
 package com.nathanmkaya.rahelper.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class Student {
     public String name;
     public String regNo;
+    public String hostel;
+    public String wing;
     public String room;
-    public ArrayList<Device> devices;
+    public List<Device> devices = new ArrayList<>();
     public boolean cleared = false;
     public String img;
+    public String comment;
 
     public Student() {
     }
@@ -22,16 +24,19 @@ public class Student {
         this.img = img;
     }
 
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("name", name);
-        result.put("regNo", regNo);
-        result.put("room", room);
-        result.put("devices", devices);
-        result.put("cleared", cleared);
-        result.put("img", img);
+    public Student(String name, String regNo, String hostel, String wing, String room, String img) {
+        this.name = name;
+        this.regNo = regNo;
+        this.hostel = hostel;
+        this.wing = wing;
+        this.room = room;
+        this.img = img;
+    }
 
-        return result;
+    public Student(String name, String regNo, String room) {
+        this.name = name;
+        this.regNo = regNo;
+        this.room = room;
     }
 
 }

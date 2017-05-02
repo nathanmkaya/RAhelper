@@ -25,6 +25,8 @@ public class StudentHolder extends RecyclerView.ViewHolder {
     public TextView studentRoomNo;
     @BindView(R.id.student_img)
     public ImageView studentImg;
+    @BindView(R.id.student_no_of_devices)
+    public TextView studentNoDevice;
 
     private ClickListener clickListener;
 

@@ -2,9 +2,13 @@ package com.nathanmkaya.rahelper.ui.clearance;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.nathanmkaya.rahelper.R;
 import com.nathanmkaya.rahelper.ui.custom.ClickListener;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -12,6 +16,17 @@ import butterknife.ButterKnife;
  */
 
 public class ClearanceHolder extends RecyclerView.ViewHolder {
+
+    @BindView(R.id.student_img)
+    public ImageView studentImg;
+    @BindView(R.id.student_name_txt)
+    public TextView studentName;
+    @BindView(R.id.student_regno_txt)
+    public TextView studentRegNo;
+    @BindView(R.id.student_room_txt)
+    public TextView studentRoom;
+    @BindView(R.id.student_status)
+    public TextView studentStatus;
 
     private ClickListener clickListener;
 
